@@ -1,4 +1,5 @@
 import pygame
+import os
 
 PIPE_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join('imgs', 'pipe.png')))
 BASE_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join('imgs', 'base.png')))
@@ -21,17 +22,23 @@ class Bird:
         self.angle = 0
         self.speed = 0
         self.height = self.y
-        self.movement_time = 0
+        self.move_time = 0
         self.img_count = 0
         self.img = IMGS[0]
 
     def jump(self):
         self.speed = -10.5
-        self.time = 0
+        self.move_time = 0
         self.height = self.y
 
     def move(self):
-        
+        self.move_time += 1
+        movement = 1.5 * (self.move_time ** 2) + self.speed * self.move_time
+
+        if movement > 16:
+            movement = 16
+        elif movement < 0:
+            movement -= 2
 
 
 
